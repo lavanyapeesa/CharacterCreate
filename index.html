@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Character Creator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+
+<body class="bg-gray-100 font-sans">
+
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-indigo-600 to-blue-500 text-white text-center py-6">
+        <h1 class="text-4xl font-bold">Create Your Character</h1>
+        <p class="mt-2">Design your character with personalized details</p>
+    </header>
+
+    <!-- Main Form Section -->
+    <main class="flex justify-center items-center mt-20 pb-10">
+        <div class="max-w-2xl mx-auto p-6"> <!-- Slightly increased form width with max-w-2xl -->
+            <form id="character-form" class="bg-white p-6 rounded-lg shadow-lg mb-6">
+                <h2 class="text-3xl font-bold text-indigo-600 mb-4">Create Your Character</h2>
+
+                <!-- Name input -->
+                <label for="name" class="block text-gray-700 font-semibold">Character Name</label>
+                <input type="text" name="name" id="name" class="w-full p-4 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="Enter character name">
+
+                <!-- Age input -->
+                <label for="age" class="block text-gray-700 font-semibold">Age</label>
+                <input type="number" name="age" id="age" class="w-full p-4 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="Enter age">
+
+                <!-- Description -->
+                <label for="description" class="block text-gray-700 font-semibold">Description</label>
+                <textarea name="description" id="description" class="w-full p-4 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="Write a short description"></textarea>
+
+                <!-- Gender, Race, and Traits -->
+                <label for="gender" class="block text-gray-700 font-semibold">Gender</label>
+                <select name="gender" id="gender" class="w-full p-4 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+
+                <label for="race" class="block text-gray-700 font-semibold">Race/Species</label>
+                <input type="text" name="race" id="race" class="w-full p-4 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="Enter race/species">
+
+                <div id="traits-container" class="mb-4">
+                    <label for="traits" class="block text-gray-700 font-semibold">Personality Traits</label>
+                    <input type="text" class="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 traits-input mb-2" placeholder="Enter a trait">
+                </div>
+                <button type="button" id="add-trait" class="bg-indigo-500 text-white p-3 rounded-lg hover:bg-indigo-700 transition duration-300">Add Another Trait</button>
+
+                <!-- Image Upload -->
+                <label for="image" class="block text-gray-700 font-semibold mt-4">Upload Image</label>
+                <input type="file" name="image" id="image" class="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 mb-4">
+                <div id="image-preview-container" class="mb-4"></div>
+
+                <!-- Custom Dialogue Section -->
+                <label for="customDialogue" class="block text-gray-700 font-semibold mt-4">Custom Dialogue</label>
+                <textarea id="customDialogue" name="customDialogue" class="w-full p-4 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="Enter custom dialogue for your character"></textarea>
+
+                <!-- Submit Button -->
+                <button type="submit" class="w-full bg-green-500 text-white p-4 rounded-lg hover:bg-green-600 transition duration-300">Create Character</button>
+            </form>
+
+            <!-- Add Search Filters and Sorting Section -->
+            <div class="filters-container mb-6">
+                <!-- Search Bar -->
+                <input type="text" id="search-bar" class="w-full p-4 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="Search name">
+
+                <!-- Filter by Race -->
+                <select id="race-filter" class="w-full p-4 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <option value="">Select Race</option>
+                    <option value="Human">Human</option>
+                    <option value="animal">Elf</option>
+                    <option value="bird">Dwarf</option>
+                    <!-- Add more races as needed -->
+                </select>
+
+                <!-- Filter by Age -->
+                <select id="age-filter" class="w-full p-4 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <option value="">Select Age Range</option>
+                    <option value="0-18">0-18</option>
+                    <option value="19-40">19-40</option>
+                    <option value="41-60">41-60</option>
+                    <!-- Add more age ranges as needed -->
+                </select>
+
+                <!-- Filter by Gender -->
+                <select id="gender-filter" class="w-full p-4 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <option value="">Select Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+
+                <!-- Sorting Options -->
+                <select id="sort-by" class="w-full p-4 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <option value="">Sort By</option>
+                    <option value="name">Name</option>
+                    <option value="age">Age</option>
+                    <option value="race">Race</option>
+                </select>
+            </div>
+
+            <!-- Character Portfolio Section -->
+            <h2 class="text-3xl font-bold text-indigo-600 mb-4">Character Portfolio</h2>
+            <div id="character-list" class="grid grid-cols-1 gap-6 md:grid-cols-2"> <!-- Updated to two columns on medium screens -->
+                <button id="export-json" class="bg-blue-500 text-white p-3 rounded-lg hover:bg-blue-700">Export to JSON</button>
+                <button id="export-txt" class="bg-blue-500 text-white p-3 rounded-lg hover:bg-blue-700">Export to Text</button>
+                <button id="export-pdf" class="bg-blue-500 text-white p-3 rounded-lg hover:bg-blue-700">Export to PDF</button>
+                <div id="character-list" class="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"></div>
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

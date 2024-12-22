@@ -1,0 +1,69 @@
+/* Example Custom Styles */
+
+body {
+    font-family: 'Arial', sans-serif; /* Changing the default font family */
+}
+
+h1 {
+    font-family: 'Roboto', sans-serif; /* Using a different font for headings */
+}
+
+/* Add more custom styles here if needed */
+/* Fix overlap by adding margin above the Character Portfolio */
+#portfolio {
+    margin-top: 60px; /* Adjust as needed */
+}
+
+/* Adjust form container height to remove unnecessary vertical centering */
+main {
+    margin-top: 40px;
+    padding-bottom: 40px;
+}
+
+.character-portfolio {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Add space below the header */
+header {
+    padding-bottom: 40px; /* Adjust as needed */
+}
+#image-preview-container img {
+    margin-top: 1rem;
+    border: 2px solid #e5e7eb; /* Light border for better separation */
+}
+
+.filters-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px; /* Space between fields */
+    margin-bottom: 1.5rem;
+}
+
+.filters-container select,
+.filters-container input {
+    flex: 1; /* Makes the fields take equal width */
+    max-width: 300px; /* Limits the max width */
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    box-sizing: border-box; /* Prevents padding from increasing width */
+}
+
+/* Add specific margins if needed for different fields */
+#search-bar {
+    max-width: 400px; /* Search bar can be a bit wider */
+}
+
+#sort-by {
+    max-width: 150px; /* Sorting dropdown can be smaller */
+}
+
+.dialogue-button {
+    margin-right: 0.5rem;
+}
+
